@@ -1,3 +1,6 @@
+<?php session_start();
+    
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,18 +19,26 @@
     </head>
     <body>
     
-        <div class="container-fluid ">
+        <div class="container-fluid pt-5">
             <div class="row">
             <div class="col-6 offset-3 pt-3">
                     <div>
-                     
+                        <?php
+                            if (isset($_SESSION['success'])) {
+                                echo "<p class='bg-success p-3 text-white'>{$_SESSION['success']}</p>";
+                                unset($_SESSION['success']);
+                            } else if (isset($_SESSION['error'])) {
+                                echo "<p class='bg-danger p-3 text-white'>{$_SESSION['error']}</p>";
+                                unset($_SESSION['error']);
+                            }
+                        ?>
                     </div>
                 </div>  
                 <div class="col-4 offset-4 pt-3 text-center">
                     <h1>Login page</h1>
                 </div>
                 <div class="col-4 offset-4 mt-4">
-                    <form method="POST" action="">
+                    <form method="POST" action="../actions/loginAction.php">
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="text" name="email" class="form-control" id="email" placeholder="Enter email" >
