@@ -65,7 +65,6 @@ abstract class DB {
         foreach($_POST as $key=>$newValue) {
             $data["{$key}"] =  $newValue;
         }
-        // var_dump($data);
         return $data;
     }
 
