@@ -1,5 +1,9 @@
-<?php session_start();
-    
+<?php 
+  session_start();
+  if(isset($_SESSION['email'])) {
+      header("Location:../views/dashboard.php");
+      die();
+  }  
 ?>
 <!DOCTYPE html>
 <html>

@@ -11,7 +11,7 @@ $(document).ready(function () {
                 <td>
                     ${counter}
                 </td>
-                <td>
+                <td class='patientClinicId'>
                     ${valueOfElement.clinic_id}
                 </td>
                 <td class='patientName'>
@@ -63,7 +63,6 @@ $(document).ready(function () {
             })
             .done(function(response){
                 let result = JSON.parse(response);
-                console.log(result);
                 $('#updatePatient').val(result.id);
                 $('#editName').val(result.name);
                 $('#editEmail').val(result.email);
@@ -149,6 +148,69 @@ $(document).ready(function () {
                 } 
             });
            
-        })
+        });
+
+        $("#searchPatient").on("submit",function(e) {
+            e.preventDefault();
+            $.ajax({
+                method: "POST",
+                url:"../actions/findPatientAction.php",
+                data: {'clinic_id' : $('#patientClinicId').val() }
+            })
+            .done(function(response){
+                let result = JSON.parse(response);
+                if(!result) {
+                    $('#patientClinicId').val('');
+                    $('#patientsInfo').html(`
+                        <p>No information about patient with this clinic number. </p>
+                    `);
+
+                } else {
+                    $('#patientsInfo').html(`
+                    <tr>
+                        <td>
+                            #
+                        </td>
+                        <td class='patientClinicId'>
+                            ${result[0].clinic_id}
+                        </td>
+                        <td class='patientName'>
+                            ${result[0]['name']}
+                        </td>
+                        <td class='patientEmail'>
+                            ${result[0]['email']}
+                        </td>
+                        <td class='patientPhone'>
+                            ${result[0]['phone_number']}
+                        </td>
+                        <td class='patientAddress'>
+                            ${result[0]['address']}
+                        </td>
+                        <td class='patientMedicalCondition'>
+                            ${result[0]['medical_condition']}
+                        </td>
+                        <td class='patientBloodType'>
+                            ${result[0]['blood_type']}
+                        </td>
+                    
+                        <td>
+                        
+                            <button type="button" id='editPatientInfo_${result[0]['id']}'
+                            class="btn btn-primary" data-toggle="modal" data-target="#patientModal">Edit</button>
+                            <button type="button" id='deletePatient_${result[0]['id']}' class="btn btn-danger">
+                                Delete
+                            </button>
+                
+                        </td>
+                    </tr>        
+                `)
+                }
+                
+                
+            })
+            .fail(function(err) {
+                console.log(err)
+            })
+        });
         
 });

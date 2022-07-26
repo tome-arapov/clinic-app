@@ -47,17 +47,6 @@ abstract class DB {
         return $this->columns;
     }
 
-    public function getData()
-    {
-        $data = [];
-        $columns = $this->getColumns();
-        foreach ($columns as $column) {
-            $method = 'get'.ucfirst($column);
-            $data[$column] = $this->$method();
-        }
-        return $data;
-    }
-
     public function getEditedData()
     {
         
@@ -68,7 +57,7 @@ abstract class DB {
         return $data;
     }
 
-    public static function find($id,string $type)
+    public static function findById($id,string $type)
     {
         self::connect();
 
@@ -144,5 +133,24 @@ abstract class DB {
 
         return false;
     } 
+
+    public static function findByVal(string $param,$val)
+    {
+        self::connect();
+        $class = get_called_class();
+        $object = new $class([]);
+        $table =  $object->getTable();
+        $sql = "SELECT * FROM {$table} WHERE {$param} = :{$param}";
+        $stmt = self::$instance->prepare($sql);
+        $arr = [$param => $val];
+        $stmt->execute($arr);
+        $result = $stmt->rowCount();
+        if ($result > 0) {
+            $arr = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            return $arr;
+        }
+
+        return false;
+    }
 
 }

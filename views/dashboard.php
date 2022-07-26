@@ -44,9 +44,9 @@ if(!isset($_SESSION['email'])) {
         <div class="container-fluid bg-light">
             <div class="row ">
                 <div class="col-6 offset-6 d-flex justify-content-end p-3">
-                    <form action="" method="POST">
+                    <form id="searchPatient">
                         <div class="form-group mb-0 d-flex">
-                            <input type="text" class='form-control' name="clinic_id" placeholder="SEARCH..." class="p-2">
+                            <input type="number" min="1001" required id="patientClinicId" class='form-control' name="clinic_id" placeholder="Search patient by clinic id..." class="p-2">
                             <button type="submit" name="search" class="btn btn-secondary ml-3">Search</button>
                         </div>
                     </form>                                

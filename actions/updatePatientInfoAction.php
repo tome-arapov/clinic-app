@@ -1,4 +1,8 @@
 <?php
+if ($_SERVER['REQUEST_METHOD'] != "POST") {
+    header("Location:../views/dashboard.php");
+    die();
+}
 require_once __DIR__."/../classes/DB.php";
 require_once __DIR__."/../classes/Patient.php";
 require_once __DIR__."/../classes/Validate.php";
@@ -8,7 +12,6 @@ use clinic\Validate;
 $everythingOkey = true;
 $messages = ['Successfully updated patient\'s info.'];
 
-// var_dump($_POST);die();
 if(!Validate::minChars(1,null,$_POST)) {
     $messages[] = "All input fields are required.";
     $everythingOkey = false;
@@ -30,10 +33,10 @@ if(!Validate::minChars(3,$_POST['medical_condition'])) {
 }
 
 if($everythingOkey) {
-    $updatedPatient = Patient::find($_POST['id'],'object');
+    $updatedPatient = Patient::findById($_POST['id'],'object');
     $updatedPatient->update($_POST);
     
-    $newlyUpdatedPatient = Patient::find($_POST['id'],'array');
+    $newlyUpdatedPatient = Patient::findById($_POST['id'],'array');
     if($updatedPatient) {
         echo json_encode(['message' => $messages[0],'status' => $everythingOkey ,'updated' => $newlyUpdatedPatient]);
 
