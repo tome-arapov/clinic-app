@@ -14,6 +14,7 @@ class User extends DB
 
     public function __construct($fields)
     {
+        $this->setId($fields['id'] ?? '');
         $this->setEmail($fields['email'] ?? '');
         $this->setPassword($fields['password'] ?? '');
     }

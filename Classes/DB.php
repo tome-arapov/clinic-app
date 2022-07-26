@@ -124,6 +124,9 @@ abstract class DB {
     {
         self::connect();
         $preparedColumns = [];
+        if(isset($params['id'])) {
+            unset($params['id']);
+        }
         foreach ($params as $key=>$val) {
             $preparedColumns[] = $key . '=:' . $key;
         }

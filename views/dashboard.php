@@ -74,7 +74,7 @@ if(!isset($_SESSION['email'])) {
             </table>                                        
         </div>
 
-        <div class="modal fade" id="patientModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal" id="patientModal" tabindex="-1" role="dialog" aria-hidden="true">
             
             <div class="modal-dialog modal-lg" role="document">
 
@@ -87,7 +87,9 @@ if(!isset($_SESSION['email'])) {
                     </div>
                     
                     <div class="modal-body">
-                       
+                        <div id="result">
+                        
+                        </div>
                         <form id="updatePatientInfo">
 
                             <div class="row">
@@ -141,7 +143,7 @@ if(!isset($_SESSION['email'])) {
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" id="updatePatientInfoBtn" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                                <button type="submit" id="updatePatientInfoBtn" class="btn btn-primary">Save changes</button>
                             </div>
 
                         </form> 
@@ -160,13 +162,15 @@ if(!isset($_SESSION['email'])) {
         
         <!-- jQuery library -->
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
         
         <!-- Latest Compiled Bootstrap 4.6.1 JavaScript -->
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+        
 
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
