@@ -39,4 +39,12 @@ class Validate {
         return true;
     }
 
+    public static function isValueNumeric($val) {
+        if (!is_numeric($val)) {
+            return false;
+        }
+
+        return true;
+    }
+
 }

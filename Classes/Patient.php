@@ -19,6 +19,7 @@ class Patient extends DB {
 
     public function __construct($fields)
     {
+        $this->setId($fields['id'] ?? '');
         $this->setClinic_id($fields['clinic_id'] ?? '');
         $this->setName($fields['name'] ?? '');
         $this->setEmail($fields['email'] ?? '');
