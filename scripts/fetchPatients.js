@@ -114,6 +114,41 @@ $(document).ready(function () {
             .fail(function(err) {
                 console.log(err)
             })
+        });
+
+        $(document).on('click','button[id*="deletePatient"]',function(event) {
+            event.preventDefault();
+            swal({
+                title: "Are you sure?",
+                text: "Once the patient is deleted, all informations for him/her will be permanently deleted !",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        method: "POST",
+                        url:"../actions/deletePatientAction.php",
+                        data: { 'patient_id' : event.target.id.split("_")[1] },
+                        success : function(response) {
+                            
+                            if(response == 200) {
+                                swal('Good job!','Patient file deleted successfully.','success');
+                                $(`#deletePatient_${event.target.id.split("_")[1]}`).closest("tr").remove();
+                                
+
+                            } else if(response == 500) {
+                                swal('Error!','Something went wrong..','error');
+
+                            }
+                            
+                        }
+                    })
+                    
+                } 
+            });
+           
         })
         
 });
