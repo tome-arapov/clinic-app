@@ -69,7 +69,7 @@ abstract class DB {
         return $data;
     }
 
-    public static function find($id)
+    public static function find($id,string $type)
     {
         self::connect();
 
@@ -81,11 +81,22 @@ abstract class DB {
         $stmt = self::$instance->prepare($sql);
         $stmt->execute(['id' => $id]);
 
-        $arr = $stmt->fetch(\PDO::FETCH_ASSOC);
+        $result = $stmt->rowCount();
 
-        $object = new $class($arr);
+        if ($result == 1) {
 
-        return $object;
+            if ($type == 'array') {
+                $arr = $stmt->fetch(\PDO::FETCH_ASSOC);
+                return $arr;
+
+            } else if ($type == 'object') {
+
+                $arr = $stmt->fetch(\PDO::FETCH_ASSOC);
+                $object = new $class($arr);
+                return $object;
+                
+            }    
+        }
     }
 
     public static function all()
